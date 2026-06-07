@@ -19,7 +19,7 @@ export const StoryCard = () => (
       </h3>
       
       <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-xl font-medium">
-        We believe that integrating nature into our daily lives isn't just an aesthetic choice—it's a fundamental step toward mindfulness and well-being. GreenNest was born from a simple desire: to make premium, air-purifying botanicals accessible to urban homes, transforming empty corners into living, breathing ecosystems.
+        We believe that integrating nature into our daily lives isn't just an aesthetic choice - it's a fundamental step toward mindfulness and well-being. GreenNest was born from a simple desire: to make premium, air-purifying botanicals accessible to urban homes, transforming empty corners into living, breathing ecosystems.
       </p>
     </div>
   </div>
