@@ -8,6 +8,7 @@ import deliveryIcon from '../../assets/first-banner/delivery.png';
 import supportIcon from '../../assets/first-banner/support.png';
 import ecoIcon from '../../assets/first-banner/eco-friendly.png';
 import plantCareIcon from '../../assets/first-banner/plant-care.png';
+import priceicon from '../../assets/first-banner/price.png';
 
 const FeaturesBanner = () => {
   const features = [
@@ -43,8 +44,8 @@ const FeaturesBanner = () => {
       id: 5,
       title: "Affordable",
       subtitle: "Pricing",
-      icon: <Tag size={40} strokeWidth={1.5} />, // Fallback Lucide Icon
-      isLucide: true
+      icon: priceicon,
+      isLucide: false
     },
     {
       id: 6,
