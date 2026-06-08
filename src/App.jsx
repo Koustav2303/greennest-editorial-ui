@@ -10,6 +10,10 @@ import SeasonalCollection from './components/seasonal-gallery/SeasonalCollection
 import Testimonials from './components/testimonials/Testimonials';
 import GardenGallery from './components/seasonal-gallery/GardenGallery';
 import PlantTips from './components/tips-guides/PlantTips';
+import Newsletter from './components/newsletter-faq/Newsletter';
+import FAQ from './components/newsletter-faq/FAQ';
+import ContactSection from './components/contact/ContactSection';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
@@ -19,37 +23,23 @@ function App() {
       <Navbar />
       
       <main>
-        {/* 1. Cinematic Hero Area */}
         <Hero />
-        
-        {/* 2. E-commerce Products Slider */}
         <BestSelling />
-
-        {/* 3. Trust Indicators Container */}
-        <FeaturesBanner />
-        
-        {/* 4. Visual Editorial Categories */}
         <FeaturedCategories />
-        
-        {/* 5. Services & Statistics Bento Grid */}
+        <FeaturesBanner />
         <PlantCareServices />
-
-        {/* 6. Brand Story & Mission */}
         <AboutSection />
-        
-        {/* 7. Seasonal Product Carousel */}
         <SeasonalCollection />
-
-        {/* 8. Customer Trust Testimonials */}
         <Testimonials />
-
-        {/* 9. Visual Inspiration Grid */}
         <GardenGallery />
-
-        {/* 10. Educational Blog Content */}
         <PlantTips />
-        
+        <Newsletter />
+        <FAQ />
+        <ContactSection />
       </main>
+
+      {/* The Ultimate GSAP Footer */}
+      <Footer />
       
     </div>
   );
