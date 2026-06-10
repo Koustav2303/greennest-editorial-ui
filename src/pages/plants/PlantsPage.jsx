@@ -2,17 +2,18 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import PlantsHero from './PlantsHero';
+import RoomMapFilter from './RoomMapFilter'; // Imported the brand new interactive architectural mapping module!
 import PlantsSidebar from './PlantsSidebar';
 import PlantsGrid from './PlantsGrid';
 
-// Importing your NEW dedicated Curated Packs Section
 import CuratedPacksBanner from './collections/CuratedPacksBanner'; 
+import BotanicalMatchmaker from './BotanicalMatchmaker'; 
 
 import Newsletter from '../../components/newsletter-faq/Newsletter';
 import Footer from '../../components/footer/Footer';
 import { ChevronRight, Home } from 'lucide-react';
 
-// Centralized Data Assets
+// Centralized Product Image Assets
 import monsteraImg from '../../assets/plants-page/monestera-deliciosa.png';
 import snakeImg from '../../assets/plants-page/snake-plant.png';
 import peaceImg from '../../assets/plants-page/peace-lilly.png';
@@ -57,12 +58,7 @@ const PlantsPage = () => {
     setSearchQuery('');
     setSelectedCategory('All Plants');
     setPriceRange(4999);
-    setActiveFilters({
-      light: [],
-      watering: [],
-      size: [],
-      features: []
-    });
+    setActiveFilters({ light: [], watering: [], size: [], features: [] });
   };
 
   const filteredPlants = useMemo(() => {
@@ -101,6 +97,10 @@ const PlantsPage = () => {
           <span className="text-[#1a1f16]">All Plants</span>
         </div>
 
+        {/* --- MOUNT THE INTERACTIVE ROOM MAP COMPONENT HERE --- */}
+        {/* Placed prominently above the catalog split structure */}
+        <RoomMapFilter activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
+
         {/* 2-Column Split Layout Area */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 pb-12">
           <PlantsSidebar 
@@ -122,13 +122,12 @@ const PlantsPage = () => {
           />
         </div>
 
+        {/* Botanical Matchmaker Quiz Module */}
+        <BotanicalMatchmaker plantsData={plantsData} />
+
       </main>
 
-      {/* NEW DEDICATED SEASONAL COLLECTION SECTION */}
-      {/* Mounted below the main content container */}
       <CuratedPacksBanner />
-
-      {/* Global Bottom Components */}
       <Newsletter />
       <Footer />
     </div>

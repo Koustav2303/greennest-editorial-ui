@@ -22,6 +22,7 @@ import ContactSection from './components/contact/ContactSection';
 
 // --- Additional Pages ---
 import PlantsPage from './pages/plants/PlantsPage';
+import ServicesPage from './pages/services/ServicesPage'; // Import the new Services Page
 
 // --- Home Page Layout Wrapper ---
 const HomePage = () => (
@@ -55,8 +56,11 @@ function App() {
           {/* Main Landing Page */}
           <Route path="/" element={<HomePage />} />
           
-          {/* The Detailed Plant Catalog Page */}
+          {/* Detailed Plant Catalog Page */}
           <Route path="/plants" element={<PlantsPage />} />
+
+          {/* NEW: Services Page Route */}
+          <Route path="/services" element={<ServicesPage />} />
         </Routes>
       </div>
     </Router>

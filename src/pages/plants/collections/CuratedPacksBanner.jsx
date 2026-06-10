@@ -3,10 +3,11 @@ import { Leaf } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CollectionCard from './CollectionCard';
 
-// Using all Unsplash URLs so we don't hit any missing local file errors!
-const airPurifierPackImg = "https://images.unsplash.com/photo-1620126407238-d28c94627d7e?q=80&w=600&auto=format&fit=crop";
-const easeCarePackImg = "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=600&auto=format&fit=crop"; 
-const deskZenPackImg = "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=600&auto=format&fit=crop"; 
+// Successfully pointing to your local 3D plant assets!
+// We use ../../../ to go from collections -> plants -> pages -> src, then into assets.
+import airPurifierPackImg from '../../../assets/plants-page/plants-page-banner/botanical-trio.png';
+import easeCarePackImg from '../../../assets/plants-page/plants-page-banner/ease-care-bundle.png';
+import deskZenPackImg from '../../../assets/plants-page/plants-page-banner/desk-zen-oasis.png';
 
 const CuratedPacksBanner = () => {
   const collectionsData = useMemo(() => [
