@@ -4,8 +4,8 @@ import topBannerImg from '../../assets/plants-page/top-banner.jpg';
 
 const PlantsHero = () => {
   return (
-    // The wrapper is now w-full with NO rounded corners or horizontal margins
-    <div className="relative w-full h-[260px] md:h-[320px] flex items-center overflow-hidden">
+    // CHANGED: Removed fixed height, added min-height, and changed flex-alignment so we can use explicit padding
+    <div className="relative w-full min-h-[320px] md:min-h-[380px] flex flex-col justify-center overflow-hidden">
       
       {/* Full Bleed Background Image & Cinematic Overlay */}
       <img 
@@ -16,8 +16,8 @@ const PlantsHero = () => {
       {/* Heavy dark gradient on the left for text, fading out to the right */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0a1508]/90 via-[#0a1508]/60 to-transparent z-10"></div>
 
-      {/* Inner Content Container - Constrained to match the rest of the page layout */}
-      <div className="relative z-20 w-full max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      {/* CHANGED: Added pt-28 md:pt-32 and pb-10 to push the content safely below the floating navbar */}
+      <div className="relative z-20 w-full max-w-[1400px] mx-auto px-4 md:px-8 pt-28 pb-10 md:pt-32 md:pb-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         
         {/* Left: Titles */}
         <div className="max-w-xl">

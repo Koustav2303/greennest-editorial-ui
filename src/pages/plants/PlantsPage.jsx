@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import PlantsHero from './PlantsHero';
-import RoomMapFilter from './RoomMapFilter'; // Imported the brand new interactive architectural mapping module!
+import RoomMapFilter from './RoomMapFilter'; 
 import PlantsSidebar from './PlantsSidebar';
 import PlantsGrid from './PlantsGrid';
 
@@ -82,14 +82,13 @@ const PlantsPage = () => {
     <div className="relative font-sans antialiased text-neutral-900 bg-white selection:bg-[#85B060] selection:text-white overflow-hidden">
       <Navbar />
       
-      <div className="pt-20 md:pt-[90px]">
-        <PlantsHero />
-      </div>
+      {/* REMOVED the <div className="pt-20 md:pt-[90px]"> wrapper here */}
+      <PlantsHero />
       
-      <main className="max-w-[1400px] mx-auto px-4 md:px-8">
+      <main className="max-w-[1400px] mx-auto px-4 md:px-8 mt-12 md:mt-16">
         
         {/* Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs font-bold text-gray-400 mt-6 mb-8 select-none relative z-10">
+        <div className="flex items-center gap-2 text-xs font-bold text-gray-400 mb-8 select-none relative z-10">
           <Home size={14} className="text-gray-400" />
           <ChevronRight size={12} />
           <Link to="/" className="hover:text-[#4A6731] transition-colors duration-200 cursor-pointer relative z-10">Home</Link>
@@ -98,7 +97,6 @@ const PlantsPage = () => {
         </div>
 
         {/* --- MOUNT THE INTERACTIVE ROOM MAP COMPONENT HERE --- */}
-        {/* Placed prominently above the catalog split structure */}
         <RoomMapFilter activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
 
         {/* 2-Column Split Layout Area */}

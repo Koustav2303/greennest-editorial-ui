@@ -1,8 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-// --- Global Contexts ---
-import { AuthProvider } from './context/AuthContext'; // Import the new AuthProvider
+// --- Global Contexts & Loaders ---
+import { AuthProvider } from './context/AuthContext'; 
+import GlobalLoader from './components/GlobalLoader'; // IMPORTED LOADER
 
 // --- Global Layout Components ---
 import Navbar from './components/Navbar';
@@ -26,7 +27,31 @@ import ContactSection from './components/contact/ContactSection';
 // --- Additional Pages ---
 import PlantsPage from './pages/plants/PlantsPage';
 import ServicesPage from './pages/services/ServicesPage'; 
-import AuthPage from './pages/auth/AuthPage'; // Import the new Auth Page
+import AuthPage from './pages/auth/AuthPage'; 
+import DashboardPage from './pages/dashboard/DashboardPage';
+
+// --- Scroll Utility Component ---
+const ScrollToAnchor = () => {
+  const { hash, pathname } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          const yCoordinate = element.getBoundingClientRect().top + window.pageYOffset;
+          const yOffset = -100; 
+          window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+        }
+      }, 100);
+    } else if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [hash, pathname]);
+
+  return null;
+};
 
 // --- Home Page Layout Wrapper ---
 const HomePage = () => (
@@ -34,18 +59,18 @@ const HomePage = () => (
     <Navbar />
     <main>
       <Hero />
-      <BestSelling />
+      <div id="plants"><BestSelling /></div>
       <FeaturesBanner />
-      <FeaturedCategories />
-      <PlantCareServices />
-      <AboutSection />
+      <div id="categories"><FeaturedCategories /></div>
+      <div id="services"><PlantCareServices /></div>
+      <div id="about"><AboutSection /></div>
       <SeasonalCollection />
       <Testimonials />
       <GardenGallery />
       <PlantTips />
       <Newsletter />
       <FAQ />
-      <ContactSection />
+      <div id="contact"><ContactSection /></div>
     </main>
     <Footer />
   </>
@@ -53,23 +78,20 @@ const HomePage = () => (
 
 function App() {
   return (
-    // WRAP EVERYTHING IN AuthProvider to make user state globally available
     <AuthProvider>
-      {/* basename handles the GitHub Pages subdirectory routing seamlessly */}
       <Router basename="/greennest-editorial-ui/">
+        
+        {/* INJECTED OUR GLOBAL LOADER AND SCROLLER */}
+        <GlobalLoader />
+        <ScrollToAnchor />
+        
         <div className="relative font-sans antialiased text-neutral-900 bg-white selection:bg-[#85B060] selection:text-white overflow-hidden">
           <Routes>
-            {/* Main Landing Page */}
             <Route path="/" element={<HomePage />} />
-            
-            {/* Detailed Plant Catalog Page */}
             <Route path="/plants" element={<PlantsPage />} />
-
-            {/* Services Page Route */}
             <Route path="/services" element={<ServicesPage />} />
-
-            {/* NEW: Authentication Page Route */}
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Routes>
         </div>
       </Router>
