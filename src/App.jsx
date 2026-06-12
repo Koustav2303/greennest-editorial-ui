@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// --- Global Contexts ---
+import { AuthProvider } from './context/AuthContext'; // Import the new AuthProvider
+
 // --- Global Layout Components ---
 import Navbar from './components/Navbar';
 import Footer from './components/footer/Footer';
@@ -22,7 +25,8 @@ import ContactSection from './components/contact/ContactSection';
 
 // --- Additional Pages ---
 import PlantsPage from './pages/plants/PlantsPage';
-import ServicesPage from './pages/services/ServicesPage'; // Import the new Services Page
+import ServicesPage from './pages/services/ServicesPage'; 
+import AuthPage from './pages/auth/AuthPage'; // Import the new Auth Page
 
 // --- Home Page Layout Wrapper ---
 const HomePage = () => (
@@ -49,21 +53,27 @@ const HomePage = () => (
 
 function App() {
   return (
-    // basename handles the GitHub Pages subdirectory routing seamlessly
-    <Router basename="/greennest-editorial-ui/">
-      <div className="relative font-sans antialiased text-neutral-900 bg-white selection:bg-[#85B060] selection:text-white overflow-hidden">
-        <Routes>
-          {/* Main Landing Page */}
-          <Route path="/" element={<HomePage />} />
-          
-          {/* Detailed Plant Catalog Page */}
-          <Route path="/plants" element={<PlantsPage />} />
+    // WRAP EVERYTHING IN AuthProvider to make user state globally available
+    <AuthProvider>
+      {/* basename handles the GitHub Pages subdirectory routing seamlessly */}
+      <Router basename="/greennest-editorial-ui/">
+        <div className="relative font-sans antialiased text-neutral-900 bg-white selection:bg-[#85B060] selection:text-white overflow-hidden">
+          <Routes>
+            {/* Main Landing Page */}
+            <Route path="/" element={<HomePage />} />
+            
+            {/* Detailed Plant Catalog Page */}
+            <Route path="/plants" element={<PlantsPage />} />
 
-          {/* NEW: Services Page Route */}
-          <Route path="/services" element={<ServicesPage />} />
-        </Routes>
-      </div>
-    </Router>
+            {/* Services Page Route */}
+            <Route path="/services" element={<ServicesPage />} />
+
+            {/* NEW: Authentication Page Route */}
+            <Route path="/auth" element={<AuthPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
