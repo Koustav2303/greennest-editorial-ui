@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 
 // --- Global Contexts & Loaders ---
 import { AuthProvider } from './context/AuthContext'; 
-import GlobalLoader from './components/GlobalLoader'; // IMPORTED LOADER
+import GlobalLoader from './components/GlobalLoader';
 
 // --- Global Layout Components ---
 import Navbar from './components/Navbar';
@@ -36,6 +36,7 @@ const ScrollToAnchor = () => {
 
   useEffect(() => {
     if (hash) {
+      // If there is a #hash, wait 100ms for DOM paint, then smooth scroll to the section
       setTimeout(() => {
         const id = hash.replace('#', '');
         const element = document.getElementById(id);
@@ -45,8 +46,10 @@ const ScrollToAnchor = () => {
           window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
         }
       }, 100);
-    } else if (pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // THE FIX: If there is no hash, instantly snap to the absolute top of the page.
+      // This ensures every fresh page load starts at 0,0 behind your global loader mask!
+      window.scrollTo(0, 0);
     }
   }, [hash, pathname]);
 
@@ -81,7 +84,6 @@ function App() {
     <AuthProvider>
       <Router basename="/greennest-editorial-ui/">
         
-        {/* INJECTED OUR GLOBAL LOADER AND SCROLLER */}
         <GlobalLoader />
         <ScrollToAnchor />
         
