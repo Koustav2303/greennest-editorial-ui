@@ -81,14 +81,14 @@ const Footer = () => {
       { label: 'Shipping & Delivery', path: '#' },
       { label: 'Returns & Refunds', path: '#' },
       { label: 'Plant Care Guide', path: '#' },
-      { label: 'Contact Us', path: '#' },
+      { label: 'Contact Us', path: '/#contact' }, // Routing back to home page contact section
     ],
     company: [
-      { label: 'About Greennest', path: '#' },
+      { label: 'About Greennest', path: '/#about' }, // Routing back to home page about section
       { label: 'Sustainability', path: '#' },
       { label: 'Careers', path: '#' },
-      { label: 'Press & Media', path: '#' },
-      { label: 'Terms of Service', path: '#' },
+      { label: 'Privacy Policy', path: '/privacy' }, // UPDATED PATH
+      { label: 'Terms of Service', path: '/terms' }, // UPDATED PATH
     ]
   };
 
@@ -153,8 +153,9 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Greennest Botanical. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs font-bold text-gray-400 justify-center md:justify-start">
-            <a href="#" className="hover:text-[#4A6731] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#4A6731] transition-colors">Terms of Use</a>
+            {/* UPDATED: Changed <a> to <Link> for SPA routing */}
+            <Link to="/privacy" className="hover:text-[#4A6731] transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[#4A6731] transition-colors">Terms of Use</Link>
           </div>
         </div>
 

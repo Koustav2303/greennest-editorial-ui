@@ -30,6 +30,10 @@ import ServicesPage from './pages/services/ServicesPage';
 import AuthPage from './pages/auth/AuthPage'; 
 import DashboardPage from './pages/dashboard/DashboardPage';
 
+// --- Legal Pages ---
+import PrivacyPolicy from './pages/legal/PrivacyPage';
+import TermsOfUse from './pages/legal/TermsOfUse';
+
 // --- Scroll Utility Component ---
 const ScrollToAnchor = () => {
   const { hash, pathname } = useLocation();
@@ -89,11 +93,16 @@ function App() {
         
         <div className="relative font-sans antialiased text-neutral-900 bg-white selection:bg-[#85B060] selection:text-white overflow-hidden">
           <Routes>
+            {/* Core Pages */}
             <Route path="/" element={<HomePage />} />
             <Route path="/plants" element={<PlantsPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            
+            {/* Legal Pages */}
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfUse />} />
           </Routes>
         </div>
       </Router>
