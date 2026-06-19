@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 
 // Importing assets based EXACTLY on your VS Code screenshot
@@ -9,25 +10,34 @@ import winterPackImg from '../../assets/second-banner/winter-care-pack.png';
 import springPackImg from '../../assets/second-banner/spring-bloosom-pack.png';
 
 const SeasonalCard = ({ title, price, image }) => (
-  // Matched the exact wide, rounded-xl shape with the soft off-white background
-  <div className="group min-w-[260px] md:min-w-[290px] bg-[#F8F9F5] rounded-3xl p-5 flex flex-col items-center justify-between cursor-pointer snap-start transition-all duration-300 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.05)] hover:-translate-y-1">
-    
-    <div className="relative h-40 md:h-44 w-full flex items-center justify-center mb-4">
+  // UPGRADED: Changed from <div> to <Link> for SPA routing, added editorial hover states
+  <Link 
+    to="/seasonals" 
+    className="group min-w-[260px] md:min-w-[290px] bg-[#F8F9F5] border border-gray-100 rounded-[2rem] p-6 flex flex-col items-center justify-between cursor-pointer snap-start transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(133,176,96,0.2)] hover:border-[#85B060]/30 hover:-translate-y-2 relative overflow-hidden isolate"
+  >
+    {/* Subtle background glow on hover */}
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#85B060]/5 opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+
+    <div className="relative h-40 md:h-48 w-full flex items-center justify-center mb-6">
       <img 
         src={image} 
         alt={title} 
-        className="max-h-full w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500 ease-out"
+        className="max-h-full w-auto object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
       />
     </div>
     
-    <div className="text-center w-full mt-auto pb-1">
-      <h3 className="text-[#2a3024] font-semibold text-[15px] tracking-tight group-hover:text-[#6B8E4E] transition-colors">
+    <div className="text-center w-full mt-auto pb-1 flex flex-col items-center">
+      <h3 className="text-[#1a1f16] font-black text-lg tracking-tight mb-1 group-hover:text-[#4A6731] transition-colors">
         {title}
       </h3>
-      <p className="text-[#1a1f16] font-extrabold text-[17px] mt-0.5">{price}</p>
+      <p className="text-gray-500 font-bold text-sm mb-3">{price}</p>
+
+      {/* NEW: Smooth sliding "Explore" action that appears on hover */}
+      <div className="flex items-center gap-1.5 text-xs font-bold text-[#85B060] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+        Explore Pack <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+      </div>
     </div>
-    
-  </div>
+  </Link>
 );
 
 const SeasonalCollection = () => {
@@ -36,7 +46,7 @@ const SeasonalCollection = () => {
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -300 : 300;
+      const scrollAmount = direction === 'left' ? -320 : 320; // Slightly increased scroll distance to match new padding
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -51,27 +61,33 @@ const SeasonalCollection = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 bg-white relative z-10" id="seasonal">
+    <section className="py-20 md:py-28 bg-white relative z-10" id="seasonal">
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         
-        <SectionHeader title="Seasonal Collection" buttonText="View All Seasonals" />
+        {/* UPGRADED: Passing the new props to your SectionHeader */}
+        <SectionHeader 
+          subtitle="Limited Seasonal Windows"
+          title="Seasonal Collection" 
+          buttonText="View All Seasonals" 
+          buttonLink="/seasonals"
+        />
 
         {/* Carousel Wrapper with Relative Positioning for Arrows */}
-        <div className="relative group">
+        <div className="relative group mt-4">
           
           {/* Floating Left Arrow */}
           <button 
             onClick={() => scroll('left')}
-            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 w-11 h-11 bg-white border border-[#e5e7eb] rounded-full items-center justify-center text-[#7e9b63] shadow-sm hover:shadow-md hover:scale-105 hover:border-[#6B8E4E] transition-all z-20"
+            className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 w-12 h-12 bg-white border border-gray-200 rounded-full items-center justify-center text-[#4A6731] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_25px_rgba(133,176,96,0.25)] hover:scale-105 hover:border-[#85B060] transition-all z-20"
             aria-label="Scroll left"
           >
-            <ChevronLeft size={22} strokeWidth={2} />
+            <ChevronLeft size={24} strokeWidth={2.5} />
           </button>
 
           {/* Scrollable Container */}
           <div 
             ref={scrollContainerRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-5 pb-6 lg:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-5 md:gap-6 pb-8 lg:pb-4 pt-4 px-2 -mx-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
             {collections.map((item) => (
               <SeasonalCard key={item.id} title={item.title} price={item.price} image={item.image} />
@@ -81,12 +97,23 @@ const SeasonalCollection = () => {
           {/* Floating Right Arrow */}
           <button 
             onClick={() => scroll('right')}
-            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 w-11 h-11 bg-white border border-[#e5e7eb] rounded-full items-center justify-center text-[#7e9b63] shadow-sm hover:shadow-md hover:scale-105 hover:border-[#6B8E4E] transition-all z-20"
+            className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 w-12 h-12 bg-white border border-gray-200 rounded-full items-center justify-center text-[#4A6731] shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_25px_rgba(133,176,96,0.25)] hover:scale-105 hover:border-[#85B060] transition-all z-20"
             aria-label="Scroll right"
           >
-            <ChevronRight size={22} strokeWidth={2} />
+            <ChevronRight size={24} strokeWidth={2.5} />
           </button>
 
+        </div>
+
+        {/* Mobile View All Button */}
+        <div className="mt-8 flex justify-center md:hidden">
+           <Link 
+              to="/seasonals"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#1a1f16] text-white rounded-xl text-sm font-bold shadow-lg w-full group"
+           >
+              View All Seasonals
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+           </Link>
         </div>
 
       </div>

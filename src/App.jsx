@@ -29,6 +29,7 @@ import PlantsPage from './pages/plants/PlantsPage';
 import ServicesPage from './pages/services/ServicesPage'; 
 import AuthPage from './pages/auth/AuthPage'; 
 import DashboardPage from './pages/dashboard/DashboardPage';
+import SeasonalPacksPage from './pages/seasonal/SeasonalPacksPage';
 
 // --- Legal Pages ---
 import PrivacyPolicy from './pages/legal/PrivacyPage';
@@ -97,6 +98,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/plants" element={<PlantsPage />} />
             <Route path="/services" element={<ServicesPage />} />
+            
+            {/* NEW: Seasonal Packs Route */}
+            <Route path="/seasonals" element={<SeasonalPacksPage />} /> 
+            
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             
